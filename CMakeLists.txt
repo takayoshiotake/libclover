@@ -6,6 +6,7 @@ add_library(clover STATIC
   )
 
 target_include_directories(clover PUBLIC -I include)
+if(APPLE)
 target_compile_options(clover PUBLIC -W -Wall)
 target_compile_options(clover PUBLIC
   $<$<CONFIG:Debug>:-O0 -g>
@@ -13,6 +14,15 @@ target_compile_options(clover PUBLIC
   $<$<CONFIG:MiniSizeRel>:-Os>
   $<$<CONFIG:RelWithDebgInfo>:-O3 -g>
   )
+elseif(WIN32)
+target_compile_options(clover PUBLIC -Wall)
+target_compile_options(clover PUBLIC
+  $<$<CONFIG:Debug>:-Od -g>
+  $<$<CONFIG:Release>:-O2>
+  $<$<CONFIG:MiniSizeRel>:-O1>
+  $<$<CONFIG:RelWithDebgInfo>:-O2 -g>
+  )
+endif()
 target_compile_definitions(clover PUBLIC
   $<$<CONFIG:Debug>:_DEBUG>
   $<$<NOT:$<CONFIG:Debug>>:NDEBUG>
