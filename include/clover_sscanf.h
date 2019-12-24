@@ -5,8 +5,9 @@
 
 // Supported formats are:
 //   - %%
-//   - %d
-//   - %f
+//   - %d, %ld
+//   - %u, %lu
+//   - %f, %lf
 //   - %s
 //   - whitespace (" ")
 //   - some character
